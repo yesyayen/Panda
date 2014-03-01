@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 
 import urllib2
 
+
 #ProductPage=urllib2.urlopen('http://www.flipkart.com/moto-g/p/itmdsmbxcrm9wy8r?pid=MOBDSGU2QFWMHGRR&otracker=ts_mg_8gb')
 ProductPage=urllib2.urlopen('http://www.flipkart.com/moto-g/p/itmdsmbxcrm9wy8r?pid=MOBDSGU2ZMDYENQA')
 ProductData=BeautifulSoup(ProductPage.read())
@@ -15,6 +16,14 @@ ProductData=BeautifulSoup(ProductPage.read())
 ReviewCount=ProductData.find("span",{'itemprop':'reviewCount'}).get_text()
 print ReviewCount
 
+RatingUserCount=ProductData.find("span",{'itemprop':'ratingCount'}).get_text()
+print RatingUserCount
+
+Rating=ProductData.find("div",{'class':'pp-big-star'}).get_text()
+print Rating
+
+
+'''
 pageNum=0
 while int(pageNum) < int(ReviewCount)/10:
     ReviewPage=urllib2.urlopen('http://www.flipkart.com/google-nexus-5/product-reviews/ITMDQ9VXQ6NSWAFG?pid=MOBDQ9VXZMHXZGBP&start='+str(pageNum))
@@ -33,8 +42,6 @@ while int(pageNum) < int(ReviewCount)/10:
 
 
 
-
-'''
 alch=AlchemyAPI()
 
 resp=alch.category("text","Nexus 5")
